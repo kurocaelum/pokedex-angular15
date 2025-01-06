@@ -14,6 +14,8 @@ export class DetailsComponent implements OnInit {
   private urlName: string = 'https://pokeapi.co/api/v2/pokemon-species'
 
   public pokemon: any
+  public isLoading: boolean = true
+  public apiError: boolean = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -33,6 +35,11 @@ export class DetailsComponent implements OnInit {
     return forkJoin([pokemon, name]).subscribe(
       res => {
         this.pokemon = res
+        // this.isLoading = false
+        this.apiError = true
+      },
+      error => {
+        this.apiError = true
       }
     )
 
